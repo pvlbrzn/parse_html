@@ -1,12 +1,27 @@
-from parse1.parse_obj1 import Book
+from parse.parse_obj import GoogleBook, GoogleGames, GoogleMovies, GoogleChild
+
+
 
 def main():
-    print(2)
-    python_course = Book('https://play.google.com/store/books?hl=ru&gl=US')
-    print(3)
-    python_course.get_html()
-    python_course.parse()
-    python_course.save_json('books.json')
+    books = GoogleBook('https://play.google.com/store/books?hl=ru&gl=US')
+    books.get_html()
+    books.parse()
+    books.save_json('books.json')
+
+    games = GoogleGames("https://play.google.com/store/games?hl=ru&gl=US")
+    games.get_html()
+    games.parse()
+    games.save_json("games.json")
+
+    movies = GoogleMovies("https://play.google.com/store/movies?hl=ru&gl=US")
+    movies.get_html()
+    movies.parse()
+    movies.save_json("movies.json")
+
+    kids = GoogleChild("https://play.google.com/store/apps/category/FAMILY?hl=ru&gl=US")
+    kids.get_html()
+    kids.parse()
+    kids.save_json("kids.json")
 
 
 if __name__ == "__main__":

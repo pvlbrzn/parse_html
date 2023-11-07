@@ -8,7 +8,7 @@ from abc import ABC, abstractmethod
 
 class ParserBase(ABC):
     html = None
-    _data = None
+    data = None
     _user_agent = (
         "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
         "(KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"
@@ -21,11 +21,11 @@ class ParserBase(ABC):
 
 
     def get_html(self):
-        responce = requests.get(self._url, headers={"User-Agent": self._user_agent})
-        if responce.status_code == 200:
-            self.html = Bs(responce.text, features='lxml')
-            return
-        raise RuntimeError("Invalid response: status = {}, text = {}".format(responce.status_code, responce.text))
+        response = requests.get(self._url, headers={"User-Agent": self._user_agent})
+        if response.status_code == 200:
+            self.html = Bs(response.text, features='lxml')
+            return ...
+        raise RuntimeError("Invalid response: status = {}, text = {}".format(response.status_code, response.text))
 
 
     @abstractmethod
@@ -35,4 +35,4 @@ class ParserBase(ABC):
 
     def save_json(self, file_name):
         with open(file_name, "w") as file:
-            file.write(json.dumps(self._data, indent=4, ensure_ascii=False))
+            file.write(json.dumps(self.data, indent=4, ensure_ascii=False))
